@@ -1,0 +1,37 @@
+{
+    "name": "bigin/shift",
+    "type": "library",
+    "require": {
+        "rap2hpoutre/fast-excel": "dev-master"
+    },
+    "license": "Bigin",
+    "authors": [
+        {
+            "name": "Minh Truong",
+            "email": "minh.truong@bigin.vn"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Bigin\\Shift\\": "src/"
+        }
+    },
+    "minimum-stability": "dev",
+    "extra": {
+        "laravel": {
+            "dont-discover": [
+                "*"
+            ],
+            "providers": [
+                "Barryvdh\\Debugbar\\ServiceProvider"
+            ],
+            "aliases": {
+                "Debugbar": "Barryvdh\\Debugbar\\Facade"
+            },
+            "branch-alias": {
+                "dev-master": "1.0-dev"
+            }
+        }
+    },
+    "description": ""
+}
