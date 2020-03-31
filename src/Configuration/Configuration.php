@@ -9,6 +9,7 @@
 namespace Bigin\Shift\Configuration;
 
 
+use Bigin\Shift\Instances\Logging\FileLogger;
 use Bigin\Shift\Logging\ILog;
 
 class Configuration
@@ -41,10 +42,10 @@ class Configuration
      */
     public $log;
 
-    public function __construct(string $filePath, ILog $log, $stopOnFailure = true)
+    public function __construct(string $filePath, $stopOnFailure = true, ILog $log = null)
     {
         $this->filePath = $filePath;
         $this->stopOnFailure = $stopOnFailure;
-        $this->log = $log;
+        $this->log = is_null($log) ? new FileLogger() : $log;
     }
 }

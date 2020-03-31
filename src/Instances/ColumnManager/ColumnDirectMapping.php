@@ -11,16 +11,12 @@ namespace Bigin\Shift\Instances\ColumnManager;
 
 use Bigin\Shift\ColumnManager\Column;
 use Bigin\Shift\ColumnManager\IColumnMapping;
-use Bigin\Shift\Instances\Validation\QuickValidation;
 use Bigin\Shift\Validation\IColumnValidator;
 
 class ColumnDirectMapping extends Column implements IColumnMapping
 {
-    public function __construct(string $from, string $column, IColumnValidator $validator = null)
+    public function __construct(string $from, string $column, IColumnValidator $validator)
     {
-        if(is_null($validator)){
-            $validator = new QuickValidation('');
-        }
         parent::__construct($validator);
         $this->setFrom($from);
         $this->setColumn($column);

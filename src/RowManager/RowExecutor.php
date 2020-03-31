@@ -49,6 +49,7 @@ class RowExecutor implements IRowExecutor
     public function __construct()
     {
         $this->setUpdateExist(false);
+        $this->setPrimaryInput('id')->setPrimaryOutput('id');
     }
 
     /**
@@ -116,7 +117,7 @@ class RowExecutor implements IRowExecutor
 
         $isAvailable = DB::table($this->getTable())->where($this->getPrimaryOutput(), $this->getInput()[$this->getPrimaryInput()])->count([$this->getPrimaryOutput()]);
         if(!empty($isAvailable)){
-            $this->update();
+            $this->update($row);
         }
 
         return;

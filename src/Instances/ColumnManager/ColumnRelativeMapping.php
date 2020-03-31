@@ -12,6 +12,7 @@ namespace Bigin\Shift\Instances\ColumnManager;
 use Bigin\Shift\ColumnManager\Column;
 use Bigin\Shift\ColumnManager\IColumnMapping;
 use Bigin\Shift\Instances\Validation\QuickValidation;
+use Bigin\Shift\Instances\Validation\RelativeValidation;
 use Bigin\Shift\Validation\IColumnValidator;
 use Illuminate\Support\Facades\DB;
 
@@ -40,7 +41,7 @@ class ColumnRelativeMapping extends Column implements IColumnMapping
     public function __construct(string $from, string $column,array $referBy, IColumnValidator $validator = null)
     {
         if(is_null($validator)){
-            $validator = new QuickValidation('');
+            $validator = new RelativeValidation($referBy);
         }
         parent::__construct($validator);
         $this->setFrom($from);

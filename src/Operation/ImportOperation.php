@@ -13,6 +13,7 @@ use Bigin\Shift\ColumnManager\Column;
 use Bigin\Shift\ColumnManager\ColumnManager;
 use Bigin\Shift\Configuration\Configuration;
 use Bigin\Shift\RowManager\RowExecutor;
+use Maatwebsite\Excel\Row;
 use Rap2hpoutre\FastExcel\FastExcel;
 
 class ImportOperation
@@ -42,6 +43,7 @@ class ImportOperation
         $this->config = $config;
         $this->columns = $columns;
         $this->columManager = new ColumnManager($columns);
+        $this->rowExecutor = new RowExecutor();
         $this->rowExecutor->setColumnManager($this->getColumManager());
     }
 
