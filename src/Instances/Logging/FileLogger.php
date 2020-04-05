@@ -31,7 +31,7 @@ class FileLogger implements ILog
     public function __construct(string $path = null)
     {
         if(is_null($path)){
-            $this->path = storage_path('logs/shift-import-'. Carbon::now()->format('d_m_H_i'));
+            $this->path = storage_path('logs/shift-import-'. Carbon::now()->format('d_m_H_i_s'));
         } else {
             $this->path = $path;
         }
@@ -45,7 +45,7 @@ class FileLogger implements ILog
      */
     public function write(int $line, string $log, string $type = ILogTypes::WARNING): bool
     {
-        file_put_contents($this->getPath(), sprintf($this->template, Carbon::now()->format('H:i:v'), $type, $line, $log), FILE_APPEND);
+        file_put_contents($this->getPath(), sprintf($this->template, Carbon::now()->format('H:i:s:v'), $type, $line, $log), FILE_APPEND);
         return true;
     }
 

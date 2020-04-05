@@ -157,6 +157,7 @@ class ImportFactory
             $readingLine++;
         }
         $this->getConfig()->getReader()->reset();
+        $this->getConfig()->getLog()->write($readingLine, __('shift::shift.success'), ILogTypes::SUCCESS);
     }
 
     /**
@@ -185,7 +186,6 @@ class ImportFactory
         try {
             while($row = $this->getConfig()->getReader()->nextRow()){
                 $this->importRow($row);
-                $this->getConfig()->getLog()->write($readingLine,__('shift::shift.success'), ILogTypes::SUCCESS);
                 $readingLine++;
             }
         }

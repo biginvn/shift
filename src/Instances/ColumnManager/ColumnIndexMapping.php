@@ -28,8 +28,9 @@ class ColumnIndexMapping extends Column implements IColumnMapping
 
     public function __construct(string $from, string $column, array $indexTable, IColumnValidator $validator = null)
     {
+        $patternValidation = 'in:'.implode(",",array_keys($indexTable));
         if(is_null($validator)){
-            $validator = new QuickValidation();
+            $validator = new QuickValidation($patternValidation);
         }
         parent::__construct($validator);
         $this->setFrom($from);
