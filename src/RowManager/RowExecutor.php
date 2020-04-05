@@ -32,11 +32,14 @@ class RowExecutor implements IRowExecutor
     private $table;
 
     /**
+     * If the value set to true, should refer to primary Input & Output
      * @var bool
      */
     private $updateExist;
 
     /**
+     * Primary input & out will identify the unique object will be insert & replace in database.
+     * Eg: Primary Input = Name, Primary Output = ProductName. Engine will search value of Name in table.ProductName, if it's exist, system will do the update (if updateExist set to true)
      * @var string Header name of input
      */
     private $primaryInput;
@@ -90,10 +93,30 @@ class RowExecutor implements IRowExecutor
 
     /**
      * @return mixed|void
-     * @throws \Exception
+     * @throws ValidationException
      */
     public function execute()
     {
+        $row = $this->rowValues();
+        /**
+         * Update if exist
+         */
+        if($this->isAvailable() && $this->isUpdateExist()){
+            $this->update($row);
+            return;
+        }
+
+        $this->store($row);
+
+        return;
+    }
+
+    /**
+     * Fill out value in columns to row
+     * @return array
+     * @throws ValidationException
+     */
+    public function rowValues() : array {
         $columns = $this->getColumnManager()->getColumns();
         $row = [];
         foreach ($columns as $column){
@@ -106,21 +129,16 @@ class RowExecutor implements IRowExecutor
             $column->format();
             $row[$column->getColumn()] = $column->getOutput();
         }
+        return $row;
+    }
 
-        /**
-         * Update if exist
-         */
-        if(!$this->isUpdateExist()){
-            $this->store($row);
-            return;
-        }
-
-        $isAvailable = DB::table($this->getTable())->where($this->getPrimaryOutput(), $this->getInput()[$this->getPrimaryInput()])->count([$this->getPrimaryOutput()]);
-        if(!empty($isAvailable)){
-            $this->update($row);
-        }
-
-        return;
+    /**
+     * Check if available row
+     * @return bool
+     */
+    public function isAvailable() : bool {
+        return DB::table($this->getTable())->where($this->getPrimaryOutput(), $this->getInput()[$this->getPrimaryInput()])
+            ->count([$this->getPrimaryOutput()]) > 0;
     }
 
     /**

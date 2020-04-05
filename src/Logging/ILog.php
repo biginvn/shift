@@ -11,6 +11,6 @@ namespace Bigin\Shift\Logging;
 
 interface ILog
 {
-    public function write(string $log, string $type = ILogTypes::WARNING) : bool;
+    public function write(int $line, string $log, string $type = ILogTypes::WARNING) : bool;
 
 }
