@@ -25,7 +25,7 @@ class QuickValidation extends ColumnValidator implements IColumnValidator
      * QuickValidation constructor.
      * @param string $validatePattern
      */
-    public function __construct(string $validatePattern)
+    public function __construct(string $validatePattern = '')
     {
         $this->pattern = $validatePattern;
     }

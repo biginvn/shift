@@ -11,8 +11,8 @@ namespace Bigin\Shift\Logging;
 
 interface ILogTypes
 {
-    const ERROR                 = "ERROR";
-    const SUCCESS               = "SUCCESS";
-    const EXCEPTION             = "EXCEPTION";
-    const WARNING               = "WARNING";
+    const VALIDATION_ERROR                  = "VALIDATION_ERROR";
+    const SUCCESS                           = "SUCCESS";
+    const UNEXPECTED_ERROR                  = "UNEXPECTED_ERROR";
+    const WARNING                           = "WARNING";
 }

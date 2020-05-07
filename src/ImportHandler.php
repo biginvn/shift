@@ -16,7 +16,7 @@ use Bigin\Shift\Instances\ColumnManager\ColumnRelativeMapping;
 use Bigin\Shift\Instances\Logging\FileLogger;
 use Bigin\Shift\Instances\Validation\QuickValidation;
 use Bigin\Shift\Instances\Validation\RelativeValidation;
-use Bigin\Shift\Operation\ImportOperation;
+use Bigin\Shift\Operation\ImportFactory;
 
 class ImportHandler
 {
@@ -28,7 +28,7 @@ class ImportHandler
             new ColumnRelativeMapping("Category", "category_id",['table'=> 'categories', 'column' => 'name'] ),
             new ColumnDirectMapping("STT", "id", new QuickValidation('numeric|required')),
         ];
-        $operation = new ImportOperation($config, $columns);
+        $operation = new ImportFactory($config, $columns);
         $operation->getRowExecutor()->setUpdateExist(true);
         $operation->getRowExecutor()->setTable('products');
     }

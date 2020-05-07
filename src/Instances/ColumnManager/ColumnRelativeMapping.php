@@ -11,7 +11,6 @@ namespace Bigin\Shift\Instances\ColumnManager;
 
 use Bigin\Shift\ColumnManager\Column;
 use Bigin\Shift\ColumnManager\IColumnMapping;
-use Bigin\Shift\Instances\Validation\QuickValidation;
 use Bigin\Shift\Instances\Validation\RelativeValidation;
 use Bigin\Shift\Validation\IColumnValidator;
 use Illuminate\Support\Facades\DB;
@@ -63,7 +62,6 @@ class ColumnRelativeMapping extends Column implements IColumnMapping
             $this->setOutput($this->getIndexTable()[$this->getInput()]);
             return;
         }
-        print_r('DB Processing Relative'. PHP_EOL);
         $output = DB::table($this->getReferByTable())->where($this->getReferByColumn(), $this->getInput())->first([$this->getReferPrimaryColumn()])->{$this->getReferPrimaryColumn()};
         $this->attachIndexTable($this->getInput(), $output);
         $this->setOutput($output);
