@@ -48,14 +48,18 @@ class RelativeValidation extends ColumnValidator implements IColumnValidator
     protected $ignoreCase;
 
     /**
+     * @var bool
+     */
+    protected $nullable;
+
+    /**
      * RelativeValidation constructor.
      * @param array
      */
     public function __construct(array $referBy)
     {
         $this->setReferByTable($referBy['table'])->setReferByColumn($referBy['column'])->setReferPrimaryColumn(isset($referBy['primary'])? $referBy['primary'] : 'id');
-        $this->setIndexTable([])->setTrim(true)->setIgnoreCase(true);
-
+        $this->setIndexTable([])->setTrim(true)->setIgnoreCase(true)->setNullable(true);
     }
 
     /**
@@ -203,5 +207,23 @@ class RelativeValidation extends ColumnValidator implements IColumnValidator
     {
         $this->ignoreCase = $ignoreCase;
         return $this;
+    }
+
+    /**
+     * @param bool $nullable
+     * @return RelativeValidation
+     */
+    public function setNullable(bool $nullable): RelativeValidation
+    {
+        $this->nullable = $nullable;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isNullable(): bool
+    {
+        return $this->nullable;
     }
 }
