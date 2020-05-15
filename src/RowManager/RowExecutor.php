@@ -101,7 +101,7 @@ class RowExecutor implements IRowExecutor
         /**
          * Update if exist
          */
-        if($this->isAvailable() && $this->isUpdateExist()){
+        if($this->isUpdateExist() && $this->isAvailable()){
             $this->update($row);
             return;
         }
