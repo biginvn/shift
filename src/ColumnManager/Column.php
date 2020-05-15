@@ -182,6 +182,7 @@ abstract class Column implements IColumnMapping
     public function setNullable(bool $nullable)
     {
         $this->nullable = $nullable;
+        return $this;
     }
 
     /**
