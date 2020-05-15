@@ -167,7 +167,6 @@ abstract class Column implements IColumnMapping
         return $this;
     }
 
-
     /**
      * @return bool
      */
